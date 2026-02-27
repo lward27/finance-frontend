@@ -1,0 +1,56 @@
+.volume-chart-container {
+    background: var(--gradient-glass);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+}
+
+.volume-chart-container .chart-loading,
+.volume-chart-container .chart-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    gap: 1rem;
+    color: var(--color-text-muted);
+}
+
+.volume-chart-container .chart-empty .empty-icon {
+    font-size: 2rem;
+}
+
+.volume-chart-container .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.volume-chart-container .chart-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.volume-chart-container .chart-stats {
+    display: flex;
+    gap: 1rem;
+}
+
+.volume-chart-container .chart-stats .stat {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+}
+
+.volume-chart-container .chart-stats .stat strong {
+    color: var(--color-text-secondary);
+}
+
+.volume-chart-container .chart-wrapper {
+    height: 200px;
+    position: relative;
+}

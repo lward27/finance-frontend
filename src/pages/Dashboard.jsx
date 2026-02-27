@@ -8,6 +8,7 @@ import './Dashboard.css';
 function Dashboard() {
     const [tickerCount, setTickerCount] = useState(0);
     const [tickers, setTickers] = useState([]);
+    const [allTickers, setAllTickers] = useState([]);
     const [scrapeStatus, setScrapeStatus] = useState(null);
     const [loading, setLoading] = useState({
         count: true,
@@ -100,13 +101,25 @@ function Dashboard() {
         }
     };
 
+    // Fetch all tickers for search (background, cached in api layer)
+    const fetchAllTickers = async () => {
+        try {
+            const data = await databaseApi.getAllTickers();
+            setAllTickers(data);
+        } catch (error) {
+            console.error('Failed to fetch all tickers:', error);
+        }
+    };
+
     // Delete ticker
     const handleDeleteTicker = async (id) => {
         if (!window.confirm('Are you sure you want to delete this ticker?')) return;
         try {
             await databaseApi.deleteTicker(id);
+            databaseApi.invalidateTickerCache();
             fetchTickers(pagination.offset);
             fetchTickerCount();
+            fetchAllTickers();
         } catch (error) {
             console.error('Failed to delete ticker:', error);
         }
@@ -120,6 +133,7 @@ function Dashboard() {
     useEffect(() => {
         fetchTickerCount();
         fetchTickers(0);
+        fetchAllTickers();
         fetchScrapeStatus();
         checkHealth();
     }, []);
@@ -163,6 +177,7 @@ function Dashboard() {
                 <div className="dashboard-main">
                     <TickerTable
                         tickers={tickers}
+                        allTickers={allTickers}
                         onDelete={handleDeleteTicker}
                         loading={loading.tickers}
                         pagination={{ ...pagination, total: tickerCount }}

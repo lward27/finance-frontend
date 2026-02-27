@@ -19,6 +19,27 @@ export const databaseApi = {
         return response.json();
     },
 
+    // Fetch all tickers by paginating through the API (cached)
+    _allTickersCache: null,
+    async getAllTickers() {
+        if (this._allTickersCache) return this._allTickersCache;
+        const count = await this.getTickerCount();
+        const batchSize = 100;
+        const offsets = [];
+        for (let i = 0; i < count; i += batchSize) {
+            offsets.push(i);
+        }
+        const batches = await Promise.all(
+            offsets.map(offset => this.getTickers(offset, batchSize))
+        );
+        this._allTickersCache = batches.flat();
+        return this._allTickersCache;
+    },
+
+    invalidateTickerCache() {
+        this._allTickersCache = null;
+    },
+
     async deleteTicker(id) {
         const response = await fetch(`${DATABASE_API}/tickers/${id}`, { method: 'DELETE' });
         if (!response.ok) throw new Error('Failed to delete ticker');
