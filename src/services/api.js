@@ -19,20 +19,23 @@ export const databaseApi = {
         return response.json();
     },
 
-    // Fetch all tickers by paginating through the API (cached)
+    // Fetch all tickers by paginating through the API (cached, concurrency-limited)
     _allTickersCache: null,
     async getAllTickers() {
         if (this._allTickersCache) return this._allTickersCache;
         const count = await this.getTickerCount();
         const batchSize = 100;
-        const offsets = [];
-        for (let i = 0; i < count; i += batchSize) {
-            offsets.push(i);
+        const concurrency = 5;
+        const allResults = [];
+        for (let i = 0; i < count; i += batchSize * concurrency) {
+            const chunk = [];
+            for (let j = 0; j < concurrency && i + j * batchSize < count; j++) {
+                chunk.push(this.getTickers(i + j * batchSize, batchSize));
+            }
+            const results = await Promise.all(chunk);
+            allResults.push(...results);
         }
-        const batches = await Promise.all(
-            offsets.map(offset => this.getTickers(offset, batchSize))
-        );
-        this._allTickersCache = batches.flat();
+        this._allTickersCache = allResults.flat();
         return this._allTickersCache;
     },
 
