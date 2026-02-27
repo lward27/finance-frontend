@@ -14,3 +14,10 @@ The React Compiler is not enabled on this template because of its impact on dev 
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+# Build docker image with this:
+
+```bash
+docker build --platform linux/amd64 --build-arg VITE_DATABASE_API=https://finance-db.lucas.engineering --build-arg VITE_YFINANCE_API=https://yfinance.lucas.engineering -t registry.lucas.engineering/finance_frontend:1.3 .
+
+```
