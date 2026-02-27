@@ -7,6 +7,11 @@ COPY package*.json ./
 RUN npm ci
 
 COPY . .
+
+ARG VITE_DATABASE_API
+ARG VITE_YFINANCE_API
+ARG VITE_SCRAPER_API
+
 RUN npm run build
 
 # Production stage
