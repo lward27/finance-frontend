@@ -1,0 +1,121 @@
+.ticker-detail {
+    padding: 2rem;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.detail-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.back-link {
+    color: var(--color-accent-primary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color var(--transition-fast);
+}
+
+.back-link:hover {
+    color: var(--color-accent-secondary);
+}
+
+.detail-title-group {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+}
+
+.detail-symbol {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0;
+    font-family: 'Monaco', 'Menlo', monospace;
+}
+
+.detail-name {
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+}
+
+.detail-stats {
+    display: flex;
+    gap: 2rem;
+    background: var(--gradient-glass);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.5rem;
+}
+
+.detail-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-dim);
+    font-weight: 600;
+}
+
+.stat-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.detail-controls {
+    margin-bottom: 1.5rem;
+}
+
+.detail-error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1rem;
+    color: var(--color-error);
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+}
+
+.detail-charts {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .ticker-detail {
+        padding: 1rem;
+    }
+
+    .detail-header {
+        flex-direction: column;
+    }
+
+    .detail-stats {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .detail-title-group {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+}
