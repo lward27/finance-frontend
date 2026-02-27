@@ -1,0 +1,130 @@
+.history-table-container {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.table-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #f1f5f9;
+    margin: 0;
+}
+
+.row-count {
+    font-size: 0.875rem;
+    color: #64748b;
+    background: rgba(99, 102, 241, 0.1);
+    padding: 0.375rem 0.75rem;
+    border-radius: 1rem;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.table-loading,
+.table-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: #94a3b8;
+}
+
+.empty-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.history-table th {
+    position: sticky;
+    top: 0;
+    background: rgba(15, 23, 42, 0.95);
+    text-align: right;
+    padding: 0.875rem 1rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #64748b;
+    border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.history-table th:first-child {
+    text-align: left;
+}
+
+.history-table td {
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+    text-align: right;
+}
+
+.history-table td:first-child {
+    text-align: left;
+}
+
+.history-table tbody tr {
+    transition: background 0.2s ease;
+}
+
+.history-table tbody tr:hover {
+    background: rgba(99, 102, 241, 0.08);
+}
+
+.date-cell {
+    font-weight: 500;
+    color: #e2e8f0;
+    font-family: 'Monaco', 'Menlo', monospace;
+    font-size: 0.875rem;
+}
+
+.price-cell {
+    color: #e2e8f0;
+    font-variant-numeric: tabular-nums;
+}
+
+.price-cell.high {
+    color: #22c55e;
+}
+
+.price-cell.low {
+    color: #ef4444;
+}
+
+.price-cell.close {
+    font-weight: 600;
+    color: #6366f1;
+}
+
+.volume-cell {
+    color: #94a3b8;
+    font-size: 0.875rem;
+}
+
+.table-footer {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(99, 102, 241, 0.2);
+    text-align: center;
+    font-size: 0.875rem;
+    color: #64748b;
+}
