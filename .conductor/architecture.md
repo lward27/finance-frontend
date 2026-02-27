@@ -1,0 +1,6 @@
+- review openapi.json for information on what endpoints are available.
+- frontend will be deployed on k3s running on my homelab on a amd64 linux vm.
+- you can access information about the cluster and services using kubectl locally.
+- you can ssh into the vm with `ssh lucas_engineering`
+- The frontend should provide capabilities to view stock ticker data.
+- The frontend should have ticker search capabilities with dateframes search capabilities.
