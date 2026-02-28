@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import PriceChart from '../components/PriceChart';
 import VolumeChart from '../components/VolumeChart';
 import HistoryTable from '../components/HistoryTable';
@@ -9,6 +9,7 @@ import './TickerDetail.css';
 
 function TickerDetail() {
     const { symbol } = useParams();
+    const navigate = useNavigate();
     const [historyData, setHistoryData] = useState([]);
     const [tickerInfo, setTickerInfo] = useState(null);
     const [loading, setLoading] = useState({ history: true, info: true });
@@ -64,11 +65,35 @@ function TickerDetail() {
         return `$${cap.toLocaleString()}`;
     };
 
+    const handleExportCSV = () => {
+        if (historyData.length === 0) return;
+
+        const headers = ['Date', 'Price Type', 'Price', 'Ticker'];
+        const rows = historyData.map(item => [
+            item.datetime,
+            item.price_type,
+            item.price,
+            item.ticker_name,
+        ]);
+
+        const csvContent = [headers, ...rows]
+            .map(row => row.join(','))
+            .join('\n');
+
+        const blob = new Blob([csvContent], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${symbol}_history.csv`;
+        a.click();
+        URL.revokeObjectURL(url);
+    };
+
     return (
         <div className="ticker-detail">
             <div className="detail-header">
                 <div className="detail-header-left">
-                    <Link to="/" className="back-link">← Back</Link>
+                    <button onClick={() => navigate(-1)} className="back-link">← Back</button>
                     <div className="detail-title-group">
                         <h1 className="detail-symbol">{symbol}</h1>
                         {tickerInfo && (
@@ -104,6 +129,13 @@ function TickerDetail() {
 
             <div className="detail-controls">
                 <TimeFrameSelector selected={timeFrame} onSelect={handleTimeFrameChange} />
+                <button
+                    className="btn-export"
+                    onClick={handleExportCSV}
+                    disabled={historyData.length === 0 || loading.history}
+                >
+                    Export CSV
+                </button>
             </div>
 
             {error && <div className="detail-error">{error}</div>}

@@ -111,134 +111,20 @@
     text-overflow: ellipsis;
 }
 
-.date-filters {
-    display: flex;
-    gap: 1rem;
-}
-
-.date-input-group {
+.explorer-loading {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-}
-
-.date-input-group label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #64748b;
-    font-weight: 600;
-}
-
-.date-input {
-    background: rgba(15, 23, 42, 0.6);
-    border: 1px solid rgba(99, 102, 241, 0.3);
-    border-radius: 0.5rem;
-    padding: 0.75rem 1rem;
-    color: #f1f5f9;
-    font-size: 0.875rem;
-}
-
-.date-input:focus {
-    outline: none;
-    border-color: #6366f1;
-}
-
-.btn-search {
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    border: none;
-    border-radius: 0.75rem;
-    padding: 1rem 2rem;
-    color: white;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-}
-
-.btn-search:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
-}
-
-.btn-search:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.ticker-info-bar {
-    display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
-    border: 1px solid rgba(99, 102, 241, 0.2);
-    border-radius: 1rem;
-    padding: 1rem 1.5rem;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-}
-
-.ticker-badge {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.badge-symbol {
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    font-weight: 700;
-    font-family: 'Monaco', 'Menlo', monospace;
-}
-
-.badge-name {
-    color: #e2e8f0;
-    font-weight: 500;
-}
-
-.ticker-quick-stats {
-    display: flex;
-    gap: 2rem;
-}
-
-.quick-stat {
+    justify-content: center;
+    padding: 3rem;
     color: #94a3b8;
-    font-size: 0.875rem;
 }
 
-.quick-stat strong {
-    color: #e2e8f0;
-}
-
-.btn-export {
-    background: rgba(99, 102, 241, 0.1);
-    border: 1px solid rgba(99, 102, 241, 0.3);
-    border-radius: 0.5rem;
-    padding: 0.625rem 1rem;
-    color: #e2e8f0;
-    font-size: 0.875rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.btn-export:hover:not(:disabled) {
-    background: rgba(99, 102, 241, 0.2);
-    border-color: #6366f1;
-}
-
-.btn-export:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.explorer-content {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+.explorer-empty {
+    text-align: center;
+    padding: 2rem;
+    color: #64748b;
+    font-size: 0.95rem;
 }
 
 @media (max-width: 768px) {
@@ -253,19 +139,5 @@
 
     .search-input-wrapper {
         min-width: 100%;
-    }
-
-    .date-filters {
-        flex-direction: column;
-    }
-
-    .ticker-info-bar {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .ticker-quick-stats {
-        flex-wrap: wrap;
-        gap: 1rem;
     }
 }
