@@ -43,8 +43,8 @@ function VolumeChart({ data, ticker, loading }) {
     }
 
     const volumeData = data
-        .filter(item => item.price_type === 'Volume')
-        .sort((a, b) => new Date(a.datetime) - new Date(b.datetime));
+        .filter(item => item.volume != null)
+        .sort((a, b) => new Date(a.ts) - new Date(b.ts));
 
     if (volumeData.length === 0) {
         return (
@@ -58,10 +58,10 @@ function VolumeChart({ data, ticker, loading }) {
     }
 
     const labels = volumeData.map(item =>
-        new Date(item.datetime).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' })
+        new Date(item.ts).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' })
     );
 
-    const volumes = volumeData.map(item => item.price);
+    const volumes = volumeData.map(item => item.volume);
 
     const chartData = {
         labels,

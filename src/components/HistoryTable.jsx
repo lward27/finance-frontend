@@ -23,19 +23,7 @@ function HistoryTable({ data, loading }) {
         );
     }
 
-    // Group data by date and pivot price types
-    const groupedData = {};
-    data.forEach(item => {
-        const date = item.datetime.split('T')[0];
-        if (!groupedData[date]) {
-            groupedData[date] = { date };
-        }
-        groupedData[date][item.price_type] = item.price;
-    });
-
-    const tableData = Object.values(groupedData).sort((a, b) =>
-        new Date(b.date) - new Date(a.date)
-    );
+    const tableData = [...data].sort((a, b) => new Date(b.ts) - new Date(a.ts));
 
     const formatPrice = (price) => {
         if (price === undefined || price === null) return '-';
@@ -69,13 +57,13 @@ function HistoryTable({ data, loading }) {
                     </thead>
                     <tbody>
                         {tableData.slice(0, 100).map(row => (
-                            <tr key={row.date}>
-                                <td className="date-cell">{row.date}</td>
-                                <td className="price-cell">{formatPrice(row.Open)}</td>
-                                <td className="price-cell high">{formatPrice(row.High)}</td>
-                                <td className="price-cell low">{formatPrice(row.Low)}</td>
-                                <td className="price-cell close">{formatPrice(row.Close)}</td>
-                                <td className="volume-cell">{formatVolume(row.Volume)}</td>
+                            <tr key={row.ts}>
+                                <td className="date-cell">{row.ts}</td>
+                                <td className="price-cell">{formatPrice(row.open)}</td>
+                                <td className="price-cell high">{formatPrice(row.high)}</td>
+                                <td className="price-cell low">{formatPrice(row.low)}</td>
+                                <td className="price-cell close">{formatPrice(row.close)}</td>
+                                <td className="volume-cell">{formatVolume(row.volume)}</td>
                             </tr>
                         ))}
                     </tbody>

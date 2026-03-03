@@ -20,7 +20,7 @@ function TickerDetail() {
         if (!days) return null;
         const d = new Date();
         d.setDate(d.getDate() - days);
-        return d.toISOString();
+        return d.toISOString().split('T')[0];
     }, []);
 
     const fetchData = useCallback(async (days) => {
@@ -68,12 +68,14 @@ function TickerDetail() {
     const handleExportCSV = () => {
         if (historyData.length === 0) return;
 
-        const headers = ['Date', 'Price Type', 'Price', 'Ticker'];
+        const headers = ['Date', 'Open', 'High', 'Low', 'Close', 'Volume'];
         const rows = historyData.map(item => [
-            item.datetime,
-            item.price_type,
-            item.price,
-            item.ticker_name,
+            item.ts,
+            item.open,
+            item.high,
+            item.low,
+            item.close,
+            item.volume,
         ]);
 
         const csvContent = [headers, ...rows]

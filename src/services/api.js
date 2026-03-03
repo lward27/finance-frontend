@@ -50,10 +50,10 @@ export const databaseApi = {
     },
 
     // History endpoints
-    async getHistory(tickerName, fromDatetime = null) {
+    async getHistory(tickerName, fromDate = null) {
         let url = `${DATABASE_API}/history?ticker_name=${encodeURIComponent(tickerName)}`;
-        if (fromDatetime) {
-            url += `&from_datetime=${encodeURIComponent(fromDatetime)}`;
+        if (fromDate) {
+            url += `&from_date=${encodeURIComponent(fromDate)}`;
         }
         const response = await fetch(url);
         if (!response.ok) throw new Error('Failed to fetch history');

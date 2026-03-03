@@ -49,14 +49,14 @@ function PriceChart({ data, ticker, loading }) {
 
     // Process data for the chart
     const closeData = data
-        .filter(item => item.price_type === 'Close')
-        .sort((a, b) => new Date(a.datetime) - new Date(b.datetime));
+        .filter(item => item.close != null)
+        .sort((a, b) => new Date(a.ts) - new Date(b.ts));
 
     const labels = closeData.map(item =>
-        new Date(item.datetime).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' })
+        new Date(item.ts).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' })
     );
 
-    const prices = closeData.map(item => item.price);
+    const prices = closeData.map(item => item.close);
 
     const chartData = {
         labels,
