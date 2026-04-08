@@ -23,6 +23,13 @@ function Navbar() {
                     <span className="nav-icon">🔍</span>
                     Explorer
                 </NavLink>
+                <NavLink
+                    to="/compare"
+                    className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+                >
+                    <span className="nav-icon">⚖️</span>
+                    Compare
+                </NavLink>
             </div>
         </nav>
     );

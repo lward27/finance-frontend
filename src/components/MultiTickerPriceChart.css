@@ -1,0 +1,22 @@
+.multi-price-chart-container {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.82), rgba(15, 23, 42, 0.92));
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+}
+
+.multi-price-chart-container .chart-wrapper {
+    height: 380px;
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    .multi-price-chart-container {
+        padding: 1rem;
+    }
+
+    .multi-price-chart-container .chart-wrapper {
+        height: 300px;
+    }
+}

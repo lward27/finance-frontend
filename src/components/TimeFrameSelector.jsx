@@ -1,13 +1,5 @@
 import './TimeFrameSelector.css';
-
-const TIME_FRAMES = [
-    { label: '1W', days: 7 },
-    { label: '1M', days: 30 },
-    { label: '3M', days: 90 },
-    { label: '6M', days: 180 },
-    { label: '1Y', days: 365 },
-    { label: 'All', days: null },
-];
+import { TIME_FRAMES } from '../utils/timeFrames';
 
 function TimeFrameSelector({ selected, onSelect }) {
     return (
