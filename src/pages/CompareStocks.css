@@ -33,7 +33,7 @@
 .compare-step {
     padding: 0.65rem 1rem;
     border-radius: var(--radius-full);
-    border: 1px solid rgba(99, 102, 241, 0.18);
+    border: 1px solid rgba(100, 102, 241, 0.18);
     background: rgba(15, 23, 42, 0.45);
     color: var(--color-text-dim);
     font-size: 0.9rem;
