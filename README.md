@@ -21,3 +21,17 @@ If you are developing a production application, we recommend using TypeScript wi
 docker build --platform linux/amd64 --build-arg VITE_DATABASE_API=https://finance-db.lucas.engineering --build-arg VITE_YFINANCE_API=https://yfinance.lucas.engineering -t registry.lucas.engineering/finance_frontend:1.3 .
 
 ```
+
+## Validation
+
+Install the locked dependencies and run the repository validation commands:
+
+```bash
+npm ci
+npm test
+npm run lint
+npm run build
+```
+
+The tests use Node's built-in test runner. Lint checks the source tree, and the
+build command creates the production Vite bundle.
