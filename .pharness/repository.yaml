@@ -1,0 +1,27 @@
+api_version: pharness.dev/v1alpha1
+environment_profile: node-24
+dependency_lock:
+  kind: npm_package_lock
+  path: package-lock.json
+  sha256: 69fa1d48c99dd7f3e335fac9aba6f3adde8858d2f2879b312ba8506a4dc208bb
+writable_paths:
+- src/**
+- tests/**
+- README.md
+acceptance_commands:
+- name: test
+  command: npm test
+- name: lint
+  command: npm run lint
+- name: build
+  command: npm run build
+roots:
+  source:
+  - src
+  tests:
+  - tests
+  documentation:
+  - README.md
+  - spec/architecture.md
+agent_network: denied
+package_installation: preparation_only

@@ -1,0 +1,1 @@
+Use the prepared Node 24 environment and the declared npm acceptance commands. Do not install packages or probe the network during coding. Keep changes within src/**, tests/**, and README.md.
