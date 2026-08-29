@@ -1,8 +1,8 @@
 // API service for communicating with backend microservices
 
-const DATABASE_API = import.meta.env.VITE_DATABASE_API || 'http://localhost:8001';
-const YFINANCE_API = import.meta.env.VITE_YFINANCE_API || 'http://localhost:8002';
-const SCRAPER_API = import.meta.env.VITE_SCRAPER_API || 'http://localhost:8003';
+const DATABASE_API = import.meta.env?.VITE_DATABASE_API || 'http://localhost:8001';
+const YFINANCE_API = import.meta.env?.VITE_YFINANCE_API || 'http://localhost:8002';
+const SCRAPER_API = import.meta.env?.VITE_SCRAPER_API || 'http://localhost:8003';
 
 // Database Service APIs
 export const databaseApi = {
@@ -73,6 +73,11 @@ export const databaseApi = {
     }
 };
 
+// Pure URL builder for deterministic testing
+export function buildUSMarketUrl(base = YFINANCE_API) {
+    return `${base}/markets/US`;
+}
+
 // YFinance Service APIs
 export const yfinanceApi = {
     async getInfo(tickerName) {
@@ -84,6 +89,12 @@ export const yfinanceApi = {
     async getHistory(tickerName, period) {
         const response = await fetch(`${YFINANCE_API}/history?ticker_name=${encodeURIComponent(tickerName)}&period=${period}`);
         if (!response.ok) throw new Error('Failed to fetch history from YFinance');
+        return response.json();
+    },
+
+    async getUSMarket() {
+        const response = await fetch(buildUSMarketUrl());
+        if (!response.ok) throw new Error('Failed to fetch US market data');
         return response.json();
     },
 

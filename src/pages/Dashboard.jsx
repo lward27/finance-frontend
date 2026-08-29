@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import StatsCard from '../components/StatsCard';
 import TickerTable from '../components/TickerTable';
 import ScrapeControls from '../components/ScrapeControls';
+import MarketOverview from '../components/MarketOverview';
 import { databaseApi, scraperApi } from '../services/api';
 import './Dashboard.css';
 
@@ -172,6 +173,8 @@ function Dashboard() {
                     trend={scrapeStatus?.is_running ? { type: 'up', text: 'In progress' } : null}
                 />
             </div>
+
+            <MarketOverview />
 
             <div className="dashboard-grid">
                 <div className="dashboard-main">

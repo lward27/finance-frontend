@@ -1,0 +1,35 @@
+.market-overview {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.market-overview-title {
+    margin: 0 0 0.75rem 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.market-overview-body {
+    margin: 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #374151;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.market-overview-loading,
+.market-overview-error,
+.market-overview-empty {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.market-overview-error {
+    color: #dc2626;
+}
