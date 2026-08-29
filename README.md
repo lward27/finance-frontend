@@ -22,6 +22,35 @@ docker build --platform linux/amd64 --build-arg VITE_DATABASE_API=https://financ
 
 ```
 
+## Shared Utilities
+
+### `tickerSearch`
+
+The `src/utils/tickerSearch.js` module exports a pure `matchTicker(stock, query)` helper that normalizes search input and safely matches it against a stock's ticker symbol or name.
+
+**Import path:**
+```js
+import { matchTicker } from './utils/tickerSearch';
+```
+
+**Function signature:**
+```js
+matchTicker(stock, query) -> boolean
+```
+
+**Behavior:**
+- Trims whitespace from `query` and lowercases both `query` and the stock fields.
+- Safely handles missing or `null` `ticker` / `name` fields (treats them as empty strings).
+- Returns `true` only when the normalized query is a non-empty substring of the normalized ticker or name.
+- Returns `false` for empty/whitespace-only queries, `null`/`undefined` stock objects, or non-string queries.
+
+**Example:**
+```js
+matchTicker({ ticker: 'AAPL', name: 'Apple Inc.' }, 'aapl'); // true
+matchTicker({ ticker: 'AAPL', name: 'Apple Inc.' }, '  apple  '); // true
+matchTicker({ ticker: 'AAPL', name: 'Apple Inc.' }, 'GOOG'); // false
+```
+
 ## Validation
 
 Install the locked dependencies and run the repository validation commands:
