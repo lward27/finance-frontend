@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { matchTicker } from '../utils/tickerSearch';
 import './TickerTable.css';
 
 function TickerTable({ tickers, allTickers = [], onDelete, loading, pagination, onPageChange }) {
@@ -9,10 +10,7 @@ function TickerTable({ tickers, allTickers = [], onDelete, loading, pagination, 
 
     // When searching, filter against ALL tickers; otherwise show current page
     const displayTickers = isSearching
-        ? allTickers.filter(ticker =>
-            ticker.ticker.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            ticker.name.toLowerCase().includes(searchTerm.toLowerCase())
-        )
+        ? allTickers.filter(ticker => matchTicker(ticker, searchTerm))
         : tickers;
 
     return (

@@ -3,6 +3,7 @@ import MultiTickerPriceChart from '../components/MultiTickerPriceChart';
 import TimeFrameSelector from '../components/TimeFrameSelector';
 import { databaseApi, yfinanceApi } from '../services/api';
 import { getTimeFrameDays } from '../utils/timeFrames';
+import { matchTicker } from '../utils/tickerSearch';
 import './CompareStocks.css';
 
 function formatCurrency(value) {
@@ -50,17 +51,13 @@ function CompareStocks() {
     }, []);
 
     const filteredTickers = useMemo(() => {
-        const query = searchQuery.trim().toLowerCase();
-        if (!query) return [];
+        if (!searchQuery.trim()) return [];
 
         const selected = new Set(selectedTickers.map((ticker) => ticker.ticker));
 
         return tickers
             .filter((ticker) => !selected.has(ticker.ticker))
-            .filter((ticker) =>
-                ticker.ticker.toLowerCase().includes(query) ||
-                ticker.name.toLowerCase().includes(query)
-            )
+            .filter((ticker) => matchTicker(ticker, searchQuery))
             .slice(0, 10);
     }, [searchQuery, selectedTickers, tickers]);
 

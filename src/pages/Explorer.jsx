@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { databaseApi } from '../services/api';
+import { matchTicker } from '../utils/tickerSearch';
 import './Explorer.css';
 
 function Explorer() {
@@ -25,10 +26,7 @@ function Explorer() {
     }, []);
 
     // Filtered tickers for autocomplete
-    const filteredTickers = tickers.filter(ticker =>
-        ticker.ticker.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        ticker.name.toLowerCase().includes(searchQuery.toLowerCase())
-    ).slice(0, 10);
+    const filteredTickers = tickers.filter(ticker => matchTicker(ticker, searchQuery)).slice(0, 10);
 
     // Navigate to ticker detail on selection
     const handleSelectTicker = (ticker) => {
