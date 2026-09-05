@@ -1,26 +1,34 @@
-# React + Vite
+# Finance frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Use Node 24, matching PHarness's prepared execution environment, and install the
+committed npm lock before running the existing acceptance commands:
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-
-# Build docker image with this:
-
-```bash
-docker build --platform linux/amd64 --build-arg VITE_DATABASE_API=https://finance-db.lucas.engineering --build-arg VITE_YFINANCE_API=https://yfinance.lucas.engineering -t registry.lucas.engineering/finance_frontend:1.3 .
-
+```sh
+npm ci
+npm test
+npm run lint
+npm run build
 ```
+
+The Dockerfile pins its Node 24 build base and Nginx runtime base, runs those same
+acceptance commands, and records the full source commit in the OCI revision label.
+For a local validation build from a clean committed checkout:
+
+```sh
+docker --context rancher-desktop buildx build --builder rancher-desktop \
+  --platform linux/amd64 --build-arg SOURCE_COMMIT="$(git rev-parse HEAD)" \
+  --load -t finance-frontend:validation .
+```
+
+Releases use `pharness-finance-frontend-build` in `lucas_engineering`, publishing
+`registry.lucas.engineering/finance-frontend:git-<source-sha>`. Deployment uses the
+returned immutable digest. The old source-push production restart webhook is
+retired. Production GitOps promotion requires its separate human approval.
+
+Service URLs are still compiled through the existing Vite configuration. Loading
+`/runtime-config.json` before application initialization remains the separate M11
+maintenance WorkItem; this packaging prerequisite does not implement or count as
+that autonomous acceptance change.
 
 ## Shared Utilities
 
