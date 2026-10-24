@@ -92,10 +92,10 @@ No `indices`, `lastUpdated`, `marketStatus`, or other fields are part of this co
 The yfinance API base is configured at build time via:
 
 ```
-VITE_YFINANCE_API=https://yfinance.lucas.engineering
+VITE_YFINANCE_API=/api/yfinance
 ```
 
-The service layer uses this boundary directly; no `VITE_API_BASE_URL` or `/api` prefix is introduced.
+Production builds use the same-origin paths `/api/database` and `/api/yfinance` (`.env.production`). The deployment's nginx proxies them to the in-cluster services, which have no public hostnames. The service layer uses this boundary directly; no `VITE_API_BASE_URL` is introduced.
 
 ### Integration
 
