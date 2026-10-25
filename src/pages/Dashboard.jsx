@@ -112,20 +112,6 @@ function Dashboard() {
         }
     };
 
-    // Delete ticker
-    const handleDeleteTicker = async (id) => {
-        if (!window.confirm('Are you sure you want to delete this ticker?')) return;
-        try {
-            await databaseApi.deleteTicker(id);
-            databaseApi.invalidateTickerCache();
-            fetchTickers(pagination.offset);
-            fetchTickerCount();
-            fetchAllTickers();
-        } catch (error) {
-            console.error('Failed to delete ticker:', error);
-        }
-    };
-
     // Handle pagination
     const handlePageChange = (newOffset) => {
         fetchTickers(newOffset);
@@ -181,7 +167,6 @@ function Dashboard() {
                     <TickerTable
                         tickers={tickers}
                         allTickers={allTickers}
-                        onDelete={handleDeleteTicker}
                         loading={loading.tickers}
                         pagination={{ ...pagination, total: tickerCount }}
                         onPageChange={handlePageChange}

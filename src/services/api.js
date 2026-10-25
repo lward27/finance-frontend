@@ -43,12 +43,6 @@ export const databaseApi = {
         this._allTickersCache = null;
     },
 
-    async deleteTicker(id) {
-        const response = await fetch(`${DATABASE_API}/tickers/${id}`, { method: 'DELETE' });
-        if (!response.ok) throw new Error('Failed to delete ticker');
-        return response.json();
-    },
-
     // History endpoints
     async getHistory(tickerName, fromDate = null) {
         let url = `${DATABASE_API}/history?ticker_name=${encodeURIComponent(tickerName)}`;
