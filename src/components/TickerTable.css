@@ -132,26 +132,6 @@
     font-size: 0.875rem;
 }
 
-.ticker-actions {
-    text-align: center;
-}
-
-.btn-delete {
-    background: rgba(239, 68, 68, 0.1);
-    border: 1px solid rgba(239, 68, 68, 0.3);
-    border-radius: 0.5rem;
-    padding: 0.5rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-size: 1rem;
-}
-
-.btn-delete:hover {
-    background: rgba(239, 68, 68, 0.2);
-    border-color: rgba(239, 68, 68, 0.5);
-    transform: scale(1.1);
-}
-
 .table-pagination {
     display: flex;
     justify-content: center;

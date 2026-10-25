@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { matchTicker } from '../utils/tickerSearch';
 import './TickerTable.css';
 
-function TickerTable({ tickers, allTickers = [], onDelete, loading, pagination, onPageChange }) {
+function TickerTable({ tickers, allTickers = [], loading, pagination, onPageChange }) {
     const [searchTerm, setSearchTerm] = useState('');
 
     const isSearching = searchTerm.length > 0;
@@ -41,13 +41,12 @@ function TickerTable({ tickers, allTickers = [], onDelete, loading, pagination, 
                                 <th>Symbol</th>
                                 <th>Name</th>
                                 <th>Exchange</th>
-                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             {displayTickers.length === 0 ? (
                                 <tr>
-                                    <td colSpan="4" className="no-results">
+                                    <td colSpan="3" className="no-results">
                                         No tickers found{isSearching ? ` for "${searchTerm}"` : ''}.
                                     </td>
                                 </tr>
@@ -65,18 +64,6 @@ function TickerTable({ tickers, allTickers = [], onDelete, loading, pagination, 
                                             </Link>
                                         </td>
                                         <td className="ticker-exchange">{ticker.exchange}</td>
-                                        <td className="ticker-actions">
-                                            <button
-                                                className="btn-delete"
-                                                onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    onDelete(ticker.id);
-                                                }}
-                                                title="Delete ticker"
-                                            >
-                                                🗑️
-                                            </button>
-                                        </td>
                                     </tr>
                                 ))
                             )}
